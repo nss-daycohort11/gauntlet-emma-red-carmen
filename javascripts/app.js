@@ -1,4 +1,4 @@
-$(document).ready(function() {
+ $(document).ready(function() {
 
   /*
     Test code to generate a human player and an orc player
@@ -27,6 +27,28 @@ $(document).ready(function() {
    */
   $("#player-setup").show();
 
+  //Store value of player name
+  var playerName = "";
+  $(".submit-name").click(function() {
+    playerName = $("#player-name").val();
+    console.log(playerName);
+  });
+
+  //Store value of selected Class 
+  var selectedClass;
+  $(".class__link").click(function(e) {
+    selectedClass = $(this).children(".btn__text").html();
+  });
+
+ 
+  //Store value of selected Weapon 
+  var selectedWeapon;
+  $(".weapon__link").click(function(e) {
+    selectedWeapon = $(this).children(".btn__text").html();
+  });
+
+
+
   /*
     When any button with card__link class is clicked,
     move on to the next view.
@@ -34,17 +56,40 @@ $(document).ready(function() {
   $(".card__link").click(function(e) {
     var nextCard = $(this).attr("next");
     var moveAlong = false;
+    console.log("you clicked a card");
 
     switch (nextCard) {
       case "card--class":
         moveAlong = ($("#player-name").val() !== "");
         break;
       case "card--weapon":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = (selectedClass !== "");
+        break;
+      case "card--battleground":
+        moveAlong = (selectedWeapon !== "");
         break;
     }
 
     if (moveAlong) {
+      if (nextCard === "card--weapon") {
+        if (selectedClass === "Warrior" ||
+            selectedClass === "Valkyrie" ||
+            selectedClass === "Berserker" ) {
+          console.log("fighter");
+          $("#weapons-view").show();
+          $("#spells-view").hide();
+        } else if (selectedClass === "Wizard" ||
+                  selectedClass === "Sorcerer" ||
+                  selectedClass === "Conjurer" ||
+                  selectedClass === "Shaman" ||
+                  selectedClass === "Thief" ||
+                  selectedClass === "Ninja" ||
+                  selectedClass === "Assassin") {
+          console.log("magical");
+          $("#weapons-view").hide();
+          $("#spells-view").show();
+        }
+      }
       $(".card").hide();
       $("." + nextCard).show();
     }
