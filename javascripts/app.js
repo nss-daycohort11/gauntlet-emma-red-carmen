@@ -3,10 +3,10 @@
   /*
     Test code to generate a human player and an orc player
    */
-  var warrior = new Human();
-  warrior.setWeapon(new WarAxe());
-  warrior.generateClass();  // This will be used for "Surprise me" option
-  console.log(warrior.toString());
+  // var warrior = new Human();
+  // warrior.setWeapon(new WarAxe());
+  // warrior.generateClass();  // This will be used for "Surprise me" option
+  // console.log(warrior.toString());
 
   var orc = new Orc();
   orc.generateClass();
@@ -16,8 +16,8 @@
   /*
     Test code to generate a spell
    */
-  var spell = new Sphere();
-  console.log("spell: ", spell.toString());
+  // var spell = new Sphere();
+  // console.log("spell: ", spell.toString());
 
 
   /*
@@ -45,8 +45,8 @@
   var selectedWeapon;
   $(".weapon__link").click(function(e) {
     selectedWeapon = $(this).children(".btn__text").html();
+    selectedWeapon = new window[selectedWeapon];
   });
-
 
 
   /*
@@ -93,6 +93,16 @@
       $(".card").hide();
       $("." + nextCard).show();
     }
+  });
+
+  $("#defeat-enemies-button").click(function(e) {
+    //create player object
+    var currentPlayer = new Human(playerName);
+    currentPlayer.setWeapon(selectedWeapon);
+    currentPlayer.class = selectedClass;
+    // currentPlayer.generateClass();  // This will be used for "Surprise me" option
+    console.log(currentPlayer.toString());
+
   });
 
   /*
