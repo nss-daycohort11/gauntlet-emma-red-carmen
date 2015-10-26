@@ -17,4 +17,3 @@ var Orc = function() {
 };
 
 Orc.prototype = new Monster();
-

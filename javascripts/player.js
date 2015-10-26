@@ -26,7 +26,7 @@ var Player = function(name) {
       " with ",
       this.health,
       " health. ",
-      (this.class.magical) ? "Able to cast " : " Wielding a ",
+      // (this.class.magical) ? "Able to cast " : " Wielding a ",  // THROWING ERROR
       this.weapon.toString(),
       "!"
     ].join("");
@@ -67,7 +67,7 @@ var Human = function() {
   randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
   this.skinColor = this.skinColors[randomSkin];
 
-  this.allowedClasses = ["Warrior", "Berserker", "Valkyrie", "Monk"];
+  this.allowedClasses = ["Warrior", "Berserker", "Valkyrie", "Monk", "Wizard", "Sorcerer", "Conjurer", "Shaman", "Thief", "Ninja", "Assassin"];
 };
 Human.prototype = new Player();
 
@@ -83,4 +83,3 @@ var Monster = function() {
 };
 
 Monster.prototype = new Player();
-

@@ -8,6 +8,7 @@ var Weapon = function() {
   }
 };
 
+// REGULAR WEAPONS
 var Dagger = function() {
   this.name = "dagger";
   this.damage = 4;
@@ -15,8 +16,8 @@ var Dagger = function() {
 };
 Dagger.prototype = new Weapon();
 
-var BroadSword = function() {
-  this.name = "broad sword";
+var Sword = function() {
+  this.name = "sword";
   this.damage = 14;
   this.hands = 2;
 };
@@ -29,3 +30,46 @@ var WarAxe = function() {
 };
 WarAxe.prototype = new Weapon();
 
+// MAGIC SPELLS
+var Sphere = function() {
+  this.name = "spere";
+  this.damage = 4;
+  this.hands = 1;
+};
+Sphere.prototype = new Weapon();
+
+var Fireball = function() {
+  this.name = "fireball";
+  this.damage = 4;
+  this.hands = 1;
+};
+Fireball.prototype = new Weapon();
+
+var Wand = function() {
+  this.name = "wand";
+  this.damage = 4;
+  this.hands = 1;
+};
+Wand.prototype = new Weapon();
+
+// STEALTH WEAPONS
+var Cloak = function() {
+  this.name = "cloak";
+  this.damage = 4;
+  this.hands = 1;
+};
+Cloak.prototype = new Weapon();
+
+var Nunchucks = function() {
+  this.name = "nunchucks";
+  this.damage = 4;
+  this.hands = 1;
+};
+Nunchucks.prototype = new Weapon();
+
+var Crowbar = function() {
+  this.name = "crowbar";
+  this.damage = 4;
+  this.hands = 1;
+};
+Crowbar.prototype = new Weapon();

@@ -27,35 +27,37 @@ var Fighter = function() {
 Fighter.prototype = new PlayerClass();
 
 
+
 var Warrior = function() {
   this.name = "Warrior";
   this.healthBonus = this.healthBonus + 25;
   this.strengthBonus = this.strengthBonus + 30;
 };
+// console.log("chosen path = ", Warrior);
 Warrior.prototype = new Fighter();
-
 
 var Valkyrie = function() {
   this.name = "Valkyrie";
   this.healthBonus = this.healthBonus + 20;
   this.strengthBonus = this.strengthBonus + 10;
 };
+// console.log("chosen path = ", Valkyrie);
 Valkyrie.prototype = new Fighter();
-
 
 var Berserker = function() {
   this.name = "Berserker";
   this.healthBonus = this.healthBonus + 35;
   this.strengthBonus = this.strengthBonus + 20;
 };
+// console.log("chosen path = ", Berserker);
 Berserker.prototype = new Fighter();
-
 
 var Monk = function() {
   this.name = "Monk";
   this.healthBonus = this.healthBonus + 10;
   this.strengthBonus = this.strengthBonus + 40;
 };
+// console.log("chosen path = ", Monk);
 Monk.prototype = new Fighter();
 
 
@@ -66,6 +68,8 @@ Monk.prototype = new Fighter();
       - Conujurer
       - Sorcerer
  */
+
+
 var Mage = function() {
   this.name = "Mage";
   this.magical = true;
@@ -75,6 +79,31 @@ var Mage = function() {
 };
 Mage.prototype = new PlayerClass();
 
+var Wizard = function() {
+  this.name = "Wizard";
+  this.healthBonus = this.healthBonus - 15;
+  this.strengthBonus = this.strengthBonus - 25;
+  this.intelligenceBonus = this.intelligenceBonus + 40;
+};
+// console.log("chosen psth = ", Wizard);
+Wizard.prototype = new Mage();
+
+var Sorcerer = function() {
+  this.name = "Sorcerer";
+  this.healthBonus = this.healthBonus - 15;
+  this.strengthBonus = this.strengthBonus - 25;
+  this.intelligenceBonus = this.intelligenceBonus + 40;
+};
+// console.log("chosen psth = ", Sorcerer);
+Wizard.prototype = new Mage();
+
+var Conjurer = function() {
+  this.name = "Conjurer";
+  this.strengthBonus = this.strengthBonus - 10;
+  this.intelligenceBonus = this.intelligenceBonus + 10;
+};
+// console.log("chosen path = ", Conjurer);
+Conjurer.prototype = new Mage();
 
 var Shaman = function() {
   this.name = "Shaman";
@@ -82,34 +111,8 @@ var Shaman = function() {
   this.strengthBonus = this.strengthBonus - 10;
   this.intelligenceBonus = this.intelligenceBonus + 20;
 };
+// console.log("chosen path = ", Shaman);
 Shaman.prototype = new Mage();
-
-
-var Wizard = function() {
-  this.name = "Wizard";
-  this.healthBonus = this.healthBonus - 15;
-  this.strengthBonus = this.strengthBonus - 25;
-  this.intelligenceBonus = this.intelligenceBonus + 40;
-};
-Wizard.prototype = new Mage();
-
-
-var Conjurer = function() {
-  this.name = "Conjurer";
-  this.strengthBonus = this.strengthBonus - 10;
-  this.intelligenceBonus = this.intelligenceBonus + 10;
-};
-Conjurer.prototype = new Mage();
-
-
-var Sorcerer = function() {
-  this.name = "Sorcerer";
-  this.healthBonus = this.healthBonus - 5;
-  this.strengthBonus = this.strengthBonus - 20;
-  this.intelligenceBonus = this.intelligenceBonus + 30;
-};
-Sorcerer.prototype = new Mage();
-
 
 /*
     STEALTH CLASSES
@@ -117,4 +120,37 @@ Sorcerer.prototype = new Mage();
       - Ninja
       - Assassin
  */
+
+ var Stealth = function() {
+ this.healthBonus = 20;
+ this.strengthBonus = 10;
+};
+Stealth.prototype = new PlayerClass();
+
+var Thief = function() {
+  this.name = "Thief";
+  this.healthBonus = this.healthBonus - 8;
+  this.strengthBonus = this.strengthBonus + 10;
+  this.intelligenceBonus = this.intelligenceBonus + 20;
+};
+// console.log("chosen path = ", Thief);
+Thief.prototype = new Stealth();
+
+var Ninja = function() {
+  this.name = "Ninja";
+  this.healthBonus = this.healthBonus - 10;
+  this.strengthBonus = this.strengthBonus + 5;
+  this.intelligenceBonus = this.intelligenceBonus + 25;
+};
+// console.log("chosen path = ", Ninja);
+Ninja.prototype = new Stealth();
+
+var Assassin = function() {
+  this.name = "Assassin";
+  this.healthBonus = this.healthBonus - 5;
+  this.strengthBonus = this.strengthBonus + 15;
+  this.intelligenceBonus = this.intelligenceBonus + 15;
+};
+// console.log("chosen path = ", Assassin);
+Assassin.prototype = new Stealth();
 
