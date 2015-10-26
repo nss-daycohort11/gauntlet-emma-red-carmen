@@ -118,3 +118,42 @@ Sorcerer.prototype = new Mage();
       - Assassin
  */
 
+var Stealth = function() {
+ this.healthBonus = 20;
+ this.strengthBonus = 10;
+};
+Stealth.prototype = new PlayerClass();
+
+ $("#thief").click(function() {
+var Thief = function() {
+ this.name = "Thief";
+ this.healthBonus = this.healthBonus - 8;
+ this.strengthBonus = this.strengthBonus + 10;
+ this.intelligenceBonus = this.intelligenceBonus + 20;
+};
+console.log("chosen path = ", Thief);
+Thief.prototype = new Stealth();
+});
+
+$("#ninja").click(function() {
+var Ninja = function() {
+ this.name = "Ninja";
+ this.healthBonus = this.healthBonus - 10;
+ this.strengthBonus = this.strengthBonus + 5;
+ this.intelligenceBonus = this.intelligenceBonus + 25;
+};
+console.log("chosen path = ", Ninja);
+Ninja.prototype = new Stealth();
+});
+
+$("#assassin").click(function() {
+var Assassin = function() {
+ this.name = "Assassin";
+ this.healthBonus = this.healthBonus - 5;
+ this.strengthBonus = this.strengthBonus + 15;
+ this.intelligenceBonus = this.intelligenceBonus + 15;
+};
+console.log("chosen path = ", Assassin);
+Assassin.prototype = new Stealth();
+});
+

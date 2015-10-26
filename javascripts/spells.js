@@ -23,4 +23,29 @@ var Sphere = function() {
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
+
 Sphere.prototype = new Spell();
+
+// Fireball spell //
+
+var Fireball = function() {
+  this.name = "fireball";
+  this.damage = Math.floor(Math.random() * 15 + 5);
+
+  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  this.type = damageTypes[random];
+};
+
+Fireball.prototype = new Spell();
+
+// a killer wand//
+
+var Wand = function() {
+  this.name = "wand";
+  this.damage = Math.floor(Math.random() * 10 + 15);
+
+  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  this.type = damageTypes[random];
+};
+
+Wand.prototype = new Spell();

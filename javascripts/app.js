@@ -27,6 +27,40 @@ $(document).ready(function() {
    */
   $("#player-setup").show();
 
+/* 
+  Store value of player name
+  */
+
+  var playerName = "";
+  $(".submit-name").click(function() {
+    playerName = $("#player-name").val();
+    console.log(playerName);
+  });
+
+  // Store value of selected class //
+
+  var selectedClass;
+  $(".class__link").click(function(e) {
+    selectedClass = $(this).children(".btn__text").html();
+  });
+
+ 
+  //Store value of selected Weapon 
+  var selectedWeapon;
+  $(".weapon__link").click(function(e) {
+    selectedWeapon = $(this).children(".btn__text").html();
+    selectedWeapon = new window[selectedWeapon];
+  });
+
+  
+  var selectedClass;
+  $("body").click(function(e) {
+    var thisElement = $(event.target).html();
+    selectedClass = thisElement;
+    console.log(selectedClass);
+  });
+
+
   /*
     When any button with card__link class is clicked,
     move on to the next view.
@@ -42,9 +76,30 @@ $(document).ready(function() {
       case "card--weapon":
         moveAlong = ($("#player-name").val() !== "");
         break;
+      case "card--battleground":
+        moveAlong = (selectedWeapon !== "");
+        break;
     }
 
     if (moveAlong) {
+      if (nextCard === "card--weapon") {
+       if (selectedClass === "Warrior" ||
+          selectedClass === "Valkyrie" ||
+          selectedClass === "Berserker" ) {
+          console.log("fighter");
+          $("#weapons-view").show();
+          $("#spells-view").hide();
+        } else if (selectedClass === "Wizard" ||
+            selectedClass === "Sorcerer" ||
+            selectedClass === "Conjurer" ||
+            selectedClass === "Shaman" ||
+            selectedClass === "Thief" ||
+            selectedClass === "Ninja" ||
+           selectedClass === "Assassin") {
+          $("#weapons-view").hide();
+          $("#spells-view").show();
+        }
+      }
       $(".card").hide();
       $("." + nextCard).show();
     }
@@ -53,10 +108,15 @@ $(document).ready(function() {
   /*
     When the back button clicked, move back a view
    */
+
   $(".card__back").click(function(e) {
     var previousCard = $(this).attr("previous");
     $(".card").hide();
     $("." + previousCard).show();
   });
+
+
+
+
 
 });
