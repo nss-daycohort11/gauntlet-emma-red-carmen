@@ -8,10 +8,10 @@
   // warrior.generateClass();  // This will be used for "Surprise me" option
   // console.log(warrior.toString());
 
-  var orc = new Orc();
-  orc.generateClass();
-  orc.setWeapon(new BroadSword());
-  console.log(orc.toString());
+  // var orc = new Orc();
+  // orc.generateClass();
+  // orc.setWeapon(new BroadSword());
+  // console.log(orc.toString());
 
   /*
     Test code to generate a spell
@@ -38,6 +38,7 @@
   var selectedClass;
   $(".class__link").click(function(e) {
     selectedClass = $(this).children(".btn__text").html();
+    selectedClassObj = new window[selectedClass];
   });
 
  
@@ -99,9 +100,24 @@
     //create player object
     var currentPlayer = new Human(playerName);
     currentPlayer.setWeapon(selectedWeapon);
-    currentPlayer.class = selectedClass;
+    currentPlayer.class = selectedClassObj;
     // currentPlayer.generateClass();  // This will be used for "Surprise me" option
     console.log(currentPlayer.toString());
+    console.log(currentPlayer);
+
+    // create random enemy
+    var enemyName = "Guldan the Enemy";
+    var enemyOptions = ["Orc", "Ogre", "Rat"];
+    var random = Math.round(Math.random() * (enemyOptions.length - 1));
+    var randomEnemy = enemyOptions[random];
+    var currentEnemy = new window[randomEnemy](enemyName);
+    console.log(currentEnemy);
+
+    var output = "";
+    output += "<p>" + currentPlayer.toString() + "</p>";
+    output += "<p>" + currentEnemy.toString() + "</p>";
+
+    $("#game-content").html(output);
 
   });
 

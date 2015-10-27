@@ -31,7 +31,7 @@ var Fireball = function() {
   this.damage = Math.floor(Math.random() * 15 + 5);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
-  this.type = damageTypes[random];
+  this.type = this.damageTypes[random];
 };
 Fireball.prototype = new Spell();
 
@@ -41,6 +41,6 @@ var Wand = function() {
   this.damage = Math.floor(Math.random() * 10 + 15);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
-  this.type = damageTypes[random];
+  this.type = this.damageTypes[random];
 };
 Wand.prototype = new Spell();
