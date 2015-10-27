@@ -3,21 +3,21 @@ $(document).ready(function() {
   /*
     Test code to generate a human player and an orc player
    */
-  var warrior = new Human();
-  warrior.setWeapon(new WarAxe());
-  warrior.generateClass();  // This will be used for "Surprise me" option
-  console.log(warrior.toString());
+  // var warrior = new Human();
+  // warrior.setWeapon(new WarAxe());
+  // warrior.generateClass();  // This will be used for "Surprise me" option
+  // console.log(warrior.toString());
 
-  var orc = new Orc();
-  orc.generateClass();
-  orc.setWeapon(new BroadSword());
-  console.log(orc.toString());
+  // var orc = new Orc();
+  // orc.generateClass();
+  // orc.setWeapon(new BroadSword());
+  // console.log(orc.toString());
 
   /*
     Test code to generate a spell
    */
-  var spell = new Sphere();
-  console.log("spell: ", spell.toString());
+  // var spell = new Sphere();
+  // console.log("spell: ", spell.toString());
 
 
   /*
@@ -28,7 +28,7 @@ $(document).ready(function() {
   $("#player-setup").show();
 
 /* 
-  Store value of player name
+  Stores the value of a players name  //
   */
 
   var playerName = "";
@@ -37,28 +37,23 @@ $(document).ready(function() {
     console.log(playerName);
   });
 
-  // Store value of selected class //
+  // Stores the value of selected class of player//
 
   var selectedClass;
   $(".class__link").click(function(e) {
     selectedClass = $(this).children(".btn__text").html();
+    selectedClassObj = new window[selectedClass];
   });
 
  
-  //Store value of selected Weapon 
+  //Stores the value of selected Weapon choice //
+
   var selectedWeapon;
   $(".weapon__link").click(function(e) {
     selectedWeapon = $(this).children(".btn__text").html();
     selectedWeapon = new window[selectedWeapon];
   });
 
-  
-  var selectedClass;
-  $("body").click(function(e) {
-    var thisElement = $(event.target).html();
-    selectedClass = thisElement;
-    console.log(selectedClass);
-  });
 
 
   /*
@@ -95,7 +90,7 @@ $(document).ready(function() {
             selectedClass === "Shaman" ||
             selectedClass === "Thief" ||
             selectedClass === "Ninja" ||
-           selectedClass === "Assassin") {
+            selectedClass === "Assassin") {
           $("#weapons-view").hide();
           $("#spells-view").show();
         }
@@ -103,6 +98,25 @@ $(document).ready(function() {
       $(".card").hide();
       $("." + nextCard).show();
     }
+  });
+
+// Creating random enemy options //
+
+  $("#defeat-enemies-button").click(function(e) {
+    var currentPlayer = new Human(playerName);
+    currentPlayer.setWeapon(selectedWeapon);
+    currentPlayer.class = selectedClassObj;
+    console.log(currentPlayer);
+    var enemyOptions = ["Orc", "Ogre", "Rat"];
+    var random = Math.round(Math.random() * (enemyOptions.length - 1));
+    var randomEnemy = enemyOptions[random];
+    var currentEnemy = new window[randomEnemy]();
+    console.log(currentEnemy);
+    var output = "";
+    output += "<p>" + currentPlayer.toString() + "</p>";
+    output += "<p>" + currentEnemy.toString() + "</p>";
+
+    $("#game-content").html(output);
   });
 
   /*
@@ -114,6 +128,13 @@ $(document).ready(function() {
     $(".card").hide();
     $("." + previousCard).show();
   });
+
+  
+ 
+ 
+
+ 
+
 
 
 

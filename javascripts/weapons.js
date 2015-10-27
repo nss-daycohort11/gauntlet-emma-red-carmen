@@ -8,6 +8,7 @@ var Weapon = function() {
   }
 };
 
+/// Weapons for "warrior, 
 var Dagger = function() {
   this.name = "dagger";
   this.damage = 4;
@@ -20,7 +21,7 @@ var Sword = function() {
   this.damage = 14;
   this.hands = 2;
 };
-BroadSword.prototype = new Weapon();
+Sword.prototype = new Weapon();
 
 var WarAxe = function() {
   this.name = "war axe";
@@ -28,4 +29,29 @@ var WarAxe = function() {
   this.hands = 2;
 };
 WarAxe.prototype = new Weapon();
+
+// Weapons for "orc, ogre, and rat"  //
+
+var Club = function() {
+  this.name = "club";
+  this.damage = 8;
+  this.hands = 2;
+};
+Club.prototype = new Weapon();
+
+var Fist = function() {
+  this.name = "fist";
+  this.damage = 10;
+  this.hands = 2;
+};
+Fist.prototype = new Weapon();
+
+var Teeth = function() {
+  this.name = "teeth";
+  this.damage = 8;
+  this.hands = 2;
+};
+Teeth.prototype = new Weapon();
+
+
 
