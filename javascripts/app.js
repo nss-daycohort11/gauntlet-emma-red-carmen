@@ -1,30 +1,10 @@
  $(document).ready(function() {
 
-  /*
-    Test code to generate a human player and an orc player
-   */
-  // var warrior = new Human();
-  // warrior.setWeapon(new WarAxe());
-  // warrior.generateClass();  // This will be used for "Surprise me" option
-  // console.log(warrior.toString());
 
-  // var orc = new Orc();
-  // orc.generateClass();
-  // orc.setWeapon(new BroadSword());
-  // console.log(orc.toString());
+  var battlePlayerHealth;
+  var battleEnemyHealth;
 
-  /*
-    Test code to generate a spell
-   */
-  // var spell = new Sphere();
-  // console.log("spell: ", spell.toString());
-
-
-  /*
-    END OF TEST CODE
-
-    Show the initial view that accepts player name
-   */
+  // Show the initial view that accepts player name
   $("#player-setup").show();
 
   //Store value of player name
@@ -57,7 +37,7 @@
   $(".card__link").click(function(e) {
     var nextCard = $(this).attr("next");
     var moveAlong = false;
-    console.log("you clicked a card");
+    // console.log("you clicked a card");
 
     switch (nextCard) {
       case "card--class":
@@ -96,11 +76,20 @@
     }
   });
 
+  var currentPlayer;
+  var currentEnemy;
+  var totalPlayerHealth;
+  var totalEnemyHealth;
+
   $("#defeat-enemies-button").click(function(e) {
     //create player object
-    var currentPlayer = new Human(playerName);
+    currentPlayer = new Human(playerName);
     currentPlayer.setWeapon(selectedWeapon);
     currentPlayer.class = selectedClassObj;
+    //adding to get total player health
+    totalPlayerHealth = currentPlayer.health + currentPlayer.class.healthBonus;
+    battlePlayerHealth = totalPlayerHealth;
+    console.log("totalplayerhealth", totalPlayerHealth);
     // currentPlayer.generateClass();  // This will be used for "Surprise me" option
     console.log(currentPlayer.toString());
     console.log(currentPlayer);
@@ -110,7 +99,11 @@
     var enemyOptions = ["Orc", "Ogre", "Rat"];
     var random = Math.round(Math.random() * (enemyOptions.length - 1));
     var randomEnemy = enemyOptions[random];
-    var currentEnemy = new window[randomEnemy](enemyName);
+    currentEnemy = new window[randomEnemy](enemyName);
+    //adding to get total enemy health
+    totalEnemyHealth = currentEnemy.health + currentEnemy.class.healthBonus;
+    battleEnemyHealth = totalEnemyHealth;
+    console.log("totalEnemyHealth", totalEnemyHealth);
     console.log(currentEnemy);
 
     var output = "";
@@ -118,7 +111,54 @@
     output += "<p>" + currentEnemy.toString() + "</p>";
 
     $("#game-content").html(output);
+  });
 
+  var gameDiv = $("#game-content");
+
+  // function to execute battle on attack click
+  $("#attack").click(function() {
+   // subtract player damage from enemy health
+    // target player damage value
+    var playerDamage = Math.round(Math.random() * (currentPlayer.weapon.damage));
+    console.log(playerDamage);
+    // execute math and assign to variable
+    battleEnemyHealth = battleEnemyHealth - playerDamage;
+    console.log("battleEnemyHealth =", battleEnemyHealth);
+   // subtract enemy damage from player health 
+    // target enemy damage value
+    var enemyDamage = Math.round(Math.random() * (currentEnemy.weapon.damage));
+    // execute math and assign to variable
+    battlePlayerHealth = battlePlayerHealth - enemyDamage;
+    console.log("battlePlayerHealth =", battlePlayerHealth);
+    var output = "";
+
+    if (battlePlayerHealth > 0 && battleEnemyHealth > 0) {
+      output += "<p class='game-log'>" + currentPlayer.playerName;
+      output += " (" + battlePlayerHealth + " HP) ";
+      output += "attacks " + currentEnemy.playerName + " for ";
+      output += playerDamage + " damage.</p>";
+      output += "<p class='game-log'>" + currentEnemy.playerName;
+      output += " (" + battleEnemyHealth + " HP) ";
+      output += "attacks " + currentPlayer.playerName + " for ";
+      output += enemyDamage + " damage.</p>";
+      console.log("ATTACK LOG: ", output);
+      //output to html
+      gameDiv.append(output);
+    } else if (battlePlayerHealth <= 0 && battleEnemyHealth > 0) {
+      output += "<p class='game-log'>" + currentPlayer.playerName;
+      output += " (" + battlePlayerHealth + " HP) ";
+      output += "attacks " + currentEnemy.playerName + " for ";
+      output += playerDamage + " damage.</p>";
+      output += "<p class='game-log'>" + currentEnemy.playerName;
+      output += " (" + battleEnemyHealth + " HP) ";
+      output += "attacks " + currentPlayer.playerName + " TO KILL!</p><p>GAME OVER</p>";
+      gameDiv.append(output);
+    } else if (battleEnemyHealth <= 0 && battlePlayerHealth > 0) {
+      output += "<p class='game-log'>" + currentPlayer.playerName;
+      output += " (" + battlePlayerHealth + " HP) ";
+      output += "attacks " + currentEnemy.playerName + " TO KILL!</p><p>GAME OVER</p>";
+      gameDiv.append(output);
+    }
   });
 
   /*

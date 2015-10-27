@@ -3,8 +3,8 @@ var Orc = function(name) {
   this.health = this.health + 20;
   this.species = "Orc";
   this.allowedClasses = ["Warrior", "Berserker", "Shaman"];
-  this.class = "Warrior";
-  this.weapon = "club";
+  this.class = new Warrior();
+  this.weapon = new Club();
 };
 Orc.prototype = new Monster();
 
@@ -13,8 +13,8 @@ var Ogre = function(name) {
   this.health = this.health + 15;
   this.species = "Ogre";
   this.allowedClasses = ["Valkyrie", "Monk", "Conjurer"];
-  this.class = "Monk";
-  this.weapon = "fist";
+  this.class = new Monk();
+  this.weapon = new Fist();
 
   // this.generateClass = function() {
   //   // Get a random index from the allowed classes array
@@ -35,8 +35,8 @@ var Rat = function(name) {
   this.health = this.health + 25;
   this.species = "Rat";
   this.allowedClasses = ["Thief", "Ninja", "Sorcerer"];
-  this.class = "Ninja";
-  this.weapon = "teeth";
+  this.class = new Ninja();
+  this.weapon = new Teeth();
 
   // this.generateClass = function() {
   //   // Get a random index from the allowed classes array
