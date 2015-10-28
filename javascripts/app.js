@@ -4,22 +4,21 @@ $(document).ready(function() {
     Test code to generate a human player and an orc player
    */
 
-  var warrior = new Human();
-  warrior.setWeapon(new WarAxe());
+  // var warrior = new Human();
+  // warrior.setWeapon(new WarAxe());
   // warrior.generateClass();  // This will be used for "Surprise me" option
-  console.log(warrior.toString());
+  // console.log(warrior.toString());
 
-  var orc = new Orc();
+  // var orc = new Orc();
   // orc.generateClass();
-  orc.setWeapon(new BroadSword());
-  console.log(orc.toString());
+  // orc.setWeapon(new Sword());
+  // console.log(orc.toString());
 
   /*
     Test code to generate a spell
    */
-  var spell = new Sphere();
-  console.log("spell: ", spell.toString());
-
+  // var spell = new Sphere();
+  // console.log("spell: ", spell.toString());
 
   /*
     END OF TEST CODE
@@ -28,93 +27,26 @@ $(document).ready(function() {
    */
   $("#player-setup").show();
 
-
-
-// BEGIN ADDED BY RED
 var playerName = "";
 $("#select-class").click(function(e) { // listener to get player's name
-    playerName = $("#player-name").val();
-    console.log(playerName);
-    // $("#path").append('<span id="add_here">new-dynamic!!!</span>'); // trying to add player name to 'choose your path'
+    playerName = $("#playerName").val();
+    //$("#path").append('<span id="add_here">new-dynamic!!!</span>'); // trying to add player name to 'choose your path'
 });
-// END ADD
-
-
-
-  //Store value of selected Class 
-  // var selectedClass;
-  // $("body").click(function(e) {
-  //   var thisElement = $(event.target).html();
-  //   selectedClass = thisElement;
-  //   console.log(selectedClass);
-  // });
-
-
-// var selectedClass;
-// $("body").click (function(e) {
-//   var thisElement = $(event.target).html();
-//   if (thisElement === "Warrior") {
-//     selectedClass = thisElement;
-
-
-//   }
-//   else if (thisElement === "Valkyrie") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Berserker") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Monk") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Wizard") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Sorcerer") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Conjurer") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Shaman") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Thief") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Ninja") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Assassin") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Surprise") {
-//     selectedClass = thisElement;
-//   }
-//   else if (thisElement === "Dagger") {
-//     selectedWeapon = thisElement;
-//     }
-//   else if (thisElement === "Sword") {
-//     selectedWeapon = thisElement;
-//     }
-//   else if (thisElement === "War Axe") {
-//     selectedWeapon = thisElement;
-//     }
-// });
-
 
   //Store value of selected Class 
   var selectedClass;
   $(".class__link").click(function(e) {
     selectedClass = $(this).children(".btn__text").html();
+    selectedClassObj = new window[selectedClass];
   });
 
  
-  // Store value of selected Weapon // THIS WILL REPLACE ABOVE
+  // Store value of selected Weapon
   var selectedWeapon;
   $(".weapon__link").click(function(e) {
     selectedWeapon = $(this).children(".btn__text").html();
     selectedWeapon = new window[selectedWeapon];
+    console.log(selectedWeapon);
   });
 
   /*
@@ -127,10 +59,10 @@ $("#select-class").click(function(e) { // listener to get player's name
 
     switch (nextCard) {
       case "card--class":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = ($("#playerName").val() !== "");
         break;
       case "card--weapon":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = ($("#playerName").val() !== "");
         break;
       case "card--battleground":
         moveAlong = (selectedWeapon !== "");
@@ -141,7 +73,8 @@ $("#select-class").click(function(e) { // listener to get player's name
       if (nextCard === "card--weapon") {
         if (selectedClass === "Warrior" ||
             selectedClass === "Valkyrie" ||
-            selectedClass === "Berserker" ) {
+            selectedClass === "Berserker" ||
+            selectedClass === "Monk") {
           console.log("fighter");
           $("#weapons-view").show();
           $("#spells-view").hide();
@@ -150,13 +83,9 @@ $("#select-class").click(function(e) { // listener to get player's name
                   selectedClass === "Sorcerer" ||
                   selectedClass === "Conjurer" ||
                   selectedClass === "Shaman") {
-                  // selectedClass === "Thief" ||
-                  // selectedClass === "Ninja" ||
-                  // selectedClass === "Assassin") {
           $("#weapons-view").hide();
           $("#spells-view").show();
           $("#tools-view").hide();
-        // }
         } else if (selectedClass === "Thief" ||
                   selectedClass === "Ninja" ||
                   selectedClass === "Assassin") {
@@ -170,17 +99,34 @@ $("#select-class").click(function(e) { // listener to get player's name
     }
   });
 
-
-
-
-
+// Defeat Enemy Click
   $("#defeat-enemies").click (function(e) {
-    var currentPlayer = new Human();
+    console.log("Defeat Enemies clicked");
+    var currentPlayer = new Human(playerName);
     currentPlayer.setWeapon(selectedWeapon);
-    currentPlayer.class = selectedClass;
-  });
-  // var warrior = new Human();
-  // warrior.setWeapon(new WarAxe());
+    currentPlayer.class = selectedClassObj;
+
+    var enemyOptions = ["Orc", "Orge", "Rat"];
+    var random = Math.round(Math.random() * (enemyOptions.length -1));
+    var randomEnemy = enemyOptions[random];
+    var currentEnemy = new window[randomEnemy]();
+    console.log("currentEnemy", currentEnemy);
+    console.log("currentPlayer", currentPlayer);
+
+
+// Output to battleground/battlefield
+// var output = "";
+// output += "<p>" + currentPlayer.toString;
+// output += " is a " + currentPlayer.skinColor;
+// output += currentPlayer.species + "!</p>";
+// console.log(output);
+
+// $("#attack-button").click(function () {
+//   $("#battleground").html()
+// })
+
+});
+
 
   /*
     When the back button clicked, move back a view

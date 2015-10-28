@@ -21,14 +21,14 @@ var Sword = function() {
   this.damage = 14;
   this.hands = 2;
 };
-BroadSword.prototype = new Weapon();
+Sword.prototype = new Weapon();
 
-var WarAxe = function() {
+var Axe = function() {
   this.name = "war axe";
   this.damage = 18;
   this.hands = 2;
 };
-WarAxe.prototype = new Weapon();
+Axe.prototype = new Weapon();
 
 // MAGIC SPELLS
 var Sphere = function() {
