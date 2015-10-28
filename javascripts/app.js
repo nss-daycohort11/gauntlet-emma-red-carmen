@@ -1,29 +1,46 @@
  $(document).ready(function() {
 
+  var playerName = "";
+  var selectedClass;
+  var selectedWeapon;
+
+  var currentPlayer;
+  var currentEnemy;
+  var totalPlayerHealth;
+  var totalEnemyHealth;
 
   var battlePlayerHealth;
   var battleEnemyHealth;
+
+  var gameDiv = $("#game-content");
+
 
   // Show the initial view that accepts player name
   $("#player-setup").show();
 
   //Store value of player name
-  var playerName = "";
   $(".submit-name").click(function() {
     playerName = $("#player-name").val();
     console.log(playerName);
   });
 
   //Store value of selected Class 
-  var selectedClass;
   $(".class__link").click(function(e) {
     selectedClass = $(this).children(".btn__text").html();
     selectedClassObj = new window[selectedClass];
   });
 
+  $(".class__surprise").click (function(e) {
+    // var classes = ["Warrior", "Valkyrie", "Berserker", "Monk", "Wizard", "Sorcerer", "Conjurer", "Shaman", "Thief", "Ninja", "Assassin"];
+    // var random = Math.round(Math.random() * (classes.length - 1));
+    // selectedClass = classes[random];
+    // console.log("selectedClass", selectedClass);
+    // selectedClassObj = new window[selectedClass];
+    // currentPlayer.generateClass();
+  });
+
  
   //Store value of selected Weapon 
-  var selectedWeapon;
   $(".weapon__link").click(function(e) {
     selectedWeapon = $(this).children(".btn__text").html();
     selectedWeapon = new window[selectedWeapon];
@@ -55,7 +72,8 @@
       if (nextCard === "card--weapon") {
         if (selectedClass === "Warrior" ||
             selectedClass === "Valkyrie" ||
-            selectedClass === "Berserker" ) {
+            selectedClass === "Berserker" ||
+            selectedClass === "Monk" ) {
           console.log("fighter");
           $("#weapons-view").show();
           $("#spells-view").hide();
@@ -76,10 +94,7 @@
     }
   });
 
-  var currentPlayer;
-  var currentEnemy;
-  var totalPlayerHealth;
-  var totalEnemyHealth;
+  
 
   $("#defeat-enemies-button").click(function(e) {
     //create player object
@@ -90,7 +105,6 @@
     totalPlayerHealth = currentPlayer.health + currentPlayer.class.healthBonus;
     battlePlayerHealth = totalPlayerHealth;
     console.log("totalplayerhealth", totalPlayerHealth);
-    // currentPlayer.generateClass();  // This will be used for "Surprise me" option
     console.log(currentPlayer.toString());
     console.log(currentPlayer);
 
@@ -113,7 +127,6 @@
     $("#game-content").html(output);
   });
 
-  var gameDiv = $("#game-content");
 
   // function to execute battle on attack click
   $("#attack").click(function() {

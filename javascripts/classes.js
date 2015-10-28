@@ -96,6 +96,7 @@ Wizard.prototype = new Mage();
 
 var Conjurer = function() {
   this.name = "Conjurer";
+  this.healthBonus = 0;
   this.strengthBonus = this.strengthBonus - 10;
   this.intelligenceBonus = this.intelligenceBonus + 10;
 };
