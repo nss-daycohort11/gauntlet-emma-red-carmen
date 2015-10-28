@@ -1,8 +1,8 @@
 body {
   font-family: "Lato", "Helvetica", "sans-serif";
   margin: 0;
-  padding: 10px;
-  font-size: 3em;
+  padding: 0px;
+  font-size: 2.5em;
 }
 
 .field {
@@ -16,7 +16,24 @@ body {
   min-width: 500px;
 }
 
+#game-header {
+  background-color: #bfc7ce;
+  padding: 10px;
+}
 
+.game-log {
+  font-size: .75em;
+  line-height: .9em;
+  padding: 5px 5px 5px 10px;
+  margin-top: .6em;
+}
+
+.game-end {
+  text-align: center;
+  width: 500px;
+  margin: 20px auto 0;
+  color: red;
+}
 
 /*
   Section styles

@@ -8,10 +8,8 @@ var Orc = function(name) {
   this.generateClass = function() {
     // Get a random index from the allowed classes array
     var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
-
     // Get the string at the index
     var randomClass = this.allowedClasses[random];
-
     // Composes the corresponding player class into the player object
     this.class = new window[randomClass]();
     return this.class;
@@ -24,16 +22,14 @@ var Ogre = function(name) {
   this.health = this.health + 15;
   this.species = "Ogre";
   this.allowedClasses = ["Valkyrie", "Monk", "Conjurer"];
-  this.class = new Monk();
+  // this.class = new Monk();
   this.weapon = new Fist();
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array
     var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
-
     // Get the string at the index
     var randomClass = this.allowedClasses[random];
-
     // Composes the corresponding player class into the player object
     this.class = new window[randomClass]();
     return this.class;
@@ -52,10 +48,8 @@ var Rat = function(name) {
   this.generateClass = function() {
     // Get a random index from the allowed classes array
     var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
-
     // Get the string at the index
     var randomClass = this.allowedClasses[random];
-
     // Composes the corresponding player class into the player object
     this.class = new window[randomClass]();
     return this.class;

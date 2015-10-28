@@ -21,29 +21,28 @@
   //Store value of player name
   $(".submit-name").click(function() {
     playerName = $("#player-name").val();
-    console.log(playerName);
+    //create player object
+    currentPlayer = new Human(playerName);
   });
 
   //Store value of selected Class 
   $(".class__link").click(function(e) {
-    selectedClass = $(this).children(".btn__text").html();
-    selectedClassObj = new window[selectedClass];
+    if ( $(this).hasClass("surprise") ) {
+      currentPlayer.generateClass();
+      selectedClass = currentPlayer.class.name;
+    } else {
+      selectedClass = $(this).children(".btn__text").html();
+      currentPlayer.class = new window[selectedClass];
+    }
+    // console.log("the class is ", currentPlayer.class);
   });
-
-  $(".class__surprise").click (function(e) {
-    // var classes = ["Warrior", "Valkyrie", "Berserker", "Monk", "Wizard", "Sorcerer", "Conjurer", "Shaman", "Thief", "Ninja", "Assassin"];
-    // var random = Math.round(Math.random() * (classes.length - 1));
-    // selectedClass = classes[random];
-    // console.log("selectedClass", selectedClass);
-    // selectedClassObj = new window[selectedClass];
-    // currentPlayer.generateClass();
-  });
-
  
   //Store value of selected Weapon 
   $(".weapon__link").click(function(e) {
     selectedWeapon = $(this).children(".btn__text").html();
     selectedWeapon = new window[selectedWeapon];
+    // assign weapon to player
+    currentPlayer.setWeapon(selectedWeapon);
   });
 
 
@@ -97,10 +96,6 @@
   
 
   $("#defeat-enemies-button").click(function(e) {
-    //create player object
-    currentPlayer = new Human(playerName);
-    currentPlayer.setWeapon(selectedWeapon);
-    currentPlayer.class = selectedClassObj;
     //adding to get total player health
     totalPlayerHealth = currentPlayer.health + currentPlayer.class.healthBonus;
     battlePlayerHealth = totalPlayerHealth;
@@ -114,6 +109,7 @@
     var random = Math.round(Math.random() * (enemyOptions.length - 1));
     var randomEnemy = enemyOptions[random];
     currentEnemy = new window[randomEnemy](enemyName);
+    currentEnemy.class = currentEnemy.generateClass();
     //adding to get total enemy health
     totalEnemyHealth = currentEnemy.health + currentEnemy.class.healthBonus;
     battleEnemyHealth = totalEnemyHealth;
@@ -124,7 +120,7 @@
     output += "<p>" + currentPlayer.toString() + "</p>";
     output += "<p>" + currentEnemy.toString() + "</p>";
 
-    $("#game-content").html(output);
+    $("#game-header").html(output);
   });
 
 
@@ -146,30 +142,26 @@
     var output = "";
 
     if (battlePlayerHealth > 0 && battleEnemyHealth > 0) {
-      output += "<p class='game-log'>" + currentPlayer.playerName;
+      output += "<div class='game-log'><p>" + currentPlayer.playerName;
       output += " (" + battlePlayerHealth + " HP) ";
       output += "attacks " + currentEnemy.playerName + " for ";
       output += playerDamage + " damage.</p>";
-      output += "<p class='game-log'>" + currentEnemy.playerName;
+      output += "<p>" + currentEnemy.playerName;
       output += " (" + battleEnemyHealth + " HP) ";
       output += "attacks " + currentPlayer.playerName + " for ";
-      output += enemyDamage + " damage.</p>";
+      output += enemyDamage + " damage.</p></div>";
       console.log("ATTACK LOG: ", output);
       //output to html
       gameDiv.append(output);
     } else if (battlePlayerHealth <= 0 && battleEnemyHealth > 0) {
-      output += "<p class='game-log'>" + currentPlayer.playerName;
-      output += " (" + battlePlayerHealth + " HP) ";
-      output += "attacks " + currentEnemy.playerName + " for ";
-      output += playerDamage + " damage.</p>";
-      output += "<p class='game-log'>" + currentEnemy.playerName;
+      output += "<div class='game-end'><p>" + currentEnemy.playerName;
       output += " (" + battleEnemyHealth + " HP) ";
-      output += "attacks " + currentPlayer.playerName + " TO KILL!</p><p>GAME OVER</p>";
+      output += "attacks " + currentPlayer.playerName + " TO KILL!</p><img src='https://media3.giphy.com/media/PrCdnw7opGBa0/giphy.gif'><p>GAME OVER</p></div>";
       gameDiv.append(output);
     } else if (battleEnemyHealth <= 0 && battlePlayerHealth > 0) {
-      output += "<p class='game-log'>" + currentPlayer.playerName;
+      output += "<div class='game-end'><p>" + currentPlayer.playerName;
       output += " (" + battlePlayerHealth + " HP) ";
-      output += "attacks " + currentEnemy.playerName + " TO KILL!</p><p>GAME OVER</p>";
+      output += "attacks " + currentEnemy.playerName + " TO KILL!</p><img src='http://img.pandawhale.com/74110-oh-yeah-gif-Obama-b86q.gif'><p>GAME OVER</p></div>";
       gameDiv.append(output);
     }
   });
